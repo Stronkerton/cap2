@@ -32,7 +32,7 @@ employeeRouter.param('timesheetId', (req, res, next, timesheetId) => {
             next(err);
           }
         else if (row) {
-            req.timesheet = row
+            req.timesheet = row;
             next();
           } 
         else {
@@ -99,11 +99,12 @@ employeeRouter.put('/:employeeId', (req, res, next) => {
         res.status(400).send();
     }
     else {
-        const sql = 'UPDATE Employee SET name = $name, position = $position, wage = $wage';
+        const sql = 'UPDATE Employee SET name = $name, position = $position, wage = $wage WHERE id = $id';
         const values = {
             $name: name,
             $position: position,
-            $wage: wage
+            $wage: wage,
+            $id: req.employee.id
         };
         db.run(sql, values, (err, row) => {
             if (err) {
