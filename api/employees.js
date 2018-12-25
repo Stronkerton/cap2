@@ -1,8 +1,13 @@
+/*
+    Happy holidays!
+*/
+
 const express = require('express');
 const employeeRouter = express.Router();
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
 
+// Catching the employee id if supplied
 employeeRouter.param('employeeId', (req, res, next, employeeId) => {
     const sql = 'SELECT * FROM Employee WHERE id = $employeeId';
     const values = {
@@ -22,6 +27,7 @@ employeeRouter.param('employeeId', (req, res, next, employeeId) => {
     });
 });
 
+// Catching the timesheet id if supplied
 employeeRouter.param('timesheetId', (req, res, next, timesheetId) => {
     const sql = 'SELECT * FROM Timesheet WHERE id = $timesheetId';
     const values = {
@@ -41,6 +47,7 @@ employeeRouter.param('timesheetId', (req, res, next, timesheetId) => {
     });
 });
 
+// Listing the employees
 employeeRouter.get('/', (req, res, next) => {
     const sql = 'SELECT * FROM Employee WHERE is_current_employee = 1';
     db.all(sql, (err, rows) => {
@@ -52,6 +59,7 @@ employeeRouter.get('/', (req, res, next) => {
     });
 });
 
+// Creating an employee
 employeeRouter.post('/', (req, res, next) => {
     const name = req.body.employee.name,
     position = req.body.employee.position,
@@ -86,10 +94,12 @@ employeeRouter.post('/', (req, res, next) => {
     }
 });
 
+// Show a specific employee
 employeeRouter.get('/:employeeId', (req, res, next) => {
     res.status(200).send({ employee: req.employee });
 });
 
+// Changing/editing employee information
 employeeRouter.put('/:employeeId', (req, res, next) => {
     const name = req.body.employee.name,
     position = req.body.employee.position,
@@ -128,6 +138,7 @@ employeeRouter.put('/:employeeId', (req, res, next) => {
     }
 });
 
+// "Delete"/Setting "is_current_employee" to 0 instead of remove the employee from DB
 employeeRouter.delete('/:employeeId', (req, res, next) => {
     const sql = 'UPDATE Employee SET is_current_employee = 0 WHERE id = $id';
     const values = {
@@ -154,6 +165,7 @@ employeeRouter.delete('/:employeeId', (req, res, next) => {
     });
 });
 
+// Listing the timesheets for a specific employee
 employeeRouter.get('/:employeeId/timesheets', (req, res, next) => {
     const sql = 'SELECT * FROM Timesheet WHERE employee_id = $id';
     const values = {
@@ -169,6 +181,7 @@ employeeRouter.get('/:employeeId/timesheets', (req, res, next) => {
     });
 });
 
+// Creating a timesheet for a specific employee
 employeeRouter.post('/:employeeId/timesheets', (req, res, next) => {
     const hours = req.body.timesheet.hours,
     rate = req.body.timesheet.rate,
@@ -203,6 +216,7 @@ employeeRouter.post('/:employeeId/timesheets', (req, res, next) => {
     }
 });
 
+// Changing/editing a timesheet for a specific employee
 employeeRouter.put('/:employeeId/timesheets/:timesheetId', (req, res, next) => {
     const hours = req.body.timesheet.hours,
     rate = req.body.timesheet.rate,
@@ -240,6 +254,7 @@ employeeRouter.put('/:employeeId/timesheets/:timesheetId', (req, res, next) => {
     }
 });
 
+// Deleting a specific timesheet
 employeeRouter.delete('/:employeeId/timesheets/:timesheetId', (req, res, next) => {
     const sql = 'DELETE FROM Timesheet WHERE id = $id';
     const values = {

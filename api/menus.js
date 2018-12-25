@@ -129,7 +129,7 @@ menuRouter.put('/:menuId', (req, res, next) => {
     }
 });
 
-// Delete a menu
+// Delete a menu if no MenuItems are associated with the menu
 menuRouter.delete('/:menuId', (req, res, next) => {
     const checkSql = 'SELECT * FROM MenuItem WHERE menu_id = $menu_id';
     const checkValues = {

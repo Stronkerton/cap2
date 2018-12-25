@@ -1,6 +1,11 @@
+/*
+    Happy holidays!
+*/
+
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
 
+// Create the Employee table
 db.serialize(function() {
     db.run('DROP TABLE IF EXISTS Employee');
     db.run('CREATE TABLE IF NOT EXISTS Employee ( ' +
@@ -12,6 +17,7 @@ db.serialize(function() {
     'PRIMARY KEY(`id`) )');
 });
 
+// Create the Timesheet table
 db.serialize(function() {
     db.run('DROP TABLE IF EXISTS Timesheet');
     db.run('CREATE TABLE IF NOT EXISTS Timesheet ( ' +
@@ -24,6 +30,7 @@ db.serialize(function() {
     'PRIMARY KEY(`id`) )');
 });
 
+// Create the Menu table
 db.serialize(function() {
     db.run('DROP TABLE IF EXISTS Menu');
     db.run('CREATE TABLE IF NOT EXISTS Menu ( ' +
@@ -32,6 +39,7 @@ db.serialize(function() {
     'PRIMARY KEY(`id`) )');
 });
 
+// Create the MenuItem table
 db.serialize(function() {
     db.run('DROP TABLE IF EXISTS MenuItem');
     db.run('CREATE TABLE IF NOT EXISTS MenuItem ( ' +
