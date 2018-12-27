@@ -61,9 +61,9 @@ employeeRouter.get('/', (req, res, next) => {
 
 // Creating an employee
 employeeRouter.post('/', (req, res, next) => {
-    const name = req.body.employee.name,
-    position = req.body.employee.position,
-    wage = req.body.employee.wage;
+    const name = req.body.employee.name;
+    const position = req.body.employee.position;
+    const wage = req.body.employee.wage;
 
     if (!name || !position || !wage) {
         res.status(400).send();
@@ -101,9 +101,9 @@ employeeRouter.get('/:employeeId', (req, res, next) => {
 
 // Changing/editing employee information
 employeeRouter.put('/:employeeId', (req, res, next) => {
-    const name = req.body.employee.name,
-    position = req.body.employee.position,
-    wage = req.body.employee.wage;
+    const name = req.body.employee.name;
+    const position = req.body.employee.position;
+    const wage = req.body.employee.wage;
 
     if (!name || !position || !wage) {
         res.status(400).send();
@@ -183,9 +183,9 @@ employeeRouter.get('/:employeeId/timesheets', (req, res, next) => {
 
 // Creating a timesheet for a specific employee
 employeeRouter.post('/:employeeId/timesheets', (req, res, next) => {
-    const hours = req.body.timesheet.hours,
-    rate = req.body.timesheet.rate,
-    date = req.body.timesheet.date;
+    const hours = req.body.timesheet.hours;
+    const rate = req.body.timesheet.rate;
+    const date = req.body.timesheet.date;
     if (!hours || !rate || !date) {
         res.status(400).send();
     }
@@ -218,9 +218,9 @@ employeeRouter.post('/:employeeId/timesheets', (req, res, next) => {
 
 // Changing/editing a timesheet for a specific employee
 employeeRouter.put('/:employeeId/timesheets/:timesheetId', (req, res, next) => {
-    const hours = req.body.timesheet.hours,
-    rate = req.body.timesheet.rate,
-    date = req.body.timesheet.date;
+    const hours = req.body.timesheet.hours;
+    const rate = req.body.timesheet.rate;
+    const date = req.body.timesheet.date;
     if (!hours || !rate || !date) {
         res.status(400).send();
     }

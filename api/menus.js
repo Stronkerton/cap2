@@ -177,10 +177,10 @@ menuRouter.get('/:menuId/menu-items', (req, res, next) => {
 
 // Create a new menu item for a menu
 menuRouter.post('/:menuId/menu-items', (req, res, next) => {
-    const name = req.body.menuItem.name,
-    description = req.body.menuItem.description,
-    inventory = req.body.menuItem.inventory,
-    price = req.body.menuItem.price;
+    const name = req.body.menuItem.name;
+    const description = req.body.menuItem.description;
+    const inventory = req.body.menuItem.inventory;
+    const price = req.body.menuItem.price;
 
     if (!name || !description || !inventory || !price) {
         res.status(400).send();
@@ -215,10 +215,10 @@ menuRouter.post('/:menuId/menu-items', (req, res, next) => {
 
 // Changing a menu item for a specific menu
 menuRouter.put('/:menuId/menu-items/:menuItemId', (req, res, next) => {
-    const name = req.body.menuItem.name,
-    description = req.body.menuItem.description,
-    inventory = req.body.menuItem.inventory,
-    price = req.body.menuItem.price;
+    const name = req.body.menuItem.name;;
+    const description = req.body.menuItem.description;
+    const inventory = req.body.menuItem.inventory;
+    const price = req.body.menuItem.price;
 
     if (!name || !description || !inventory || !price) {
         res.status(400).send();
